@@ -6,20 +6,16 @@ const apiClient = new APIClient<Game>("/games");
 const pageSize = 16;
 
 const useGames = (gameQuery: GameQuery) => {
-  const params = {
-    genres: gameQuery.genre?.id,
-    parent_platforms: gameQuery.platform?.id,
-    ordering: gameQuery.sortOrder,
-    search: gameQuery.searchText,
-    page_size: pageSize,
-  };
-
   return useInfiniteQuery<FetchResponse<Game>, Error>({
-    queryKey: ["games", params],
+    queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.get({
         params: {
-          ...params,
+          genres: gameQuery.genreId,
+          parent_platforms: gameQuery.platformId,
+          ordering: gameQuery.sortOrder,
+          search: gameQuery.searchText,
+          page_size: pageSize,
           page: pageParam,
         },
       }),
