@@ -10,6 +10,11 @@ export interface Platform {
   slug: string;
 }
 
+export interface Publishers {
+  id: number;
+  name: string;
+}
+
 export interface Game {
   id: number;
   name: string;
@@ -19,4 +24,6 @@ export interface Game {
   metacritic: number;
   rating_top: number;
   description_raw: string;
+  genres: Genre[];
+  publishers: Publishers[];
 }
